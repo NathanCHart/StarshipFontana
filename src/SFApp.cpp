@@ -125,6 +125,14 @@ void SFApp::OnRender() {
     c->OnRender();
   }
 
+  for(auto wx: wallx) {
+    c->OnRender;
+ }
+
+ for(auto wy: wally) {
+    c->OnRender;
+ }
+
   // Switch the off-screen buffer to be on-screen
   SDL_RenderPresent(sf_window->getRenderer());
 }
