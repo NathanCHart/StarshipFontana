@@ -18,6 +18,15 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
     aliens.push_back(alien);
   }
 
+const int number_of_wallsx = 20;
+  for(int i=0; i<number_of_wallsx; i++) {
+    // place an alien at width/number_of_aliens * i
+    auto wallsx = make_shared<SFAsset>(SFASSET_WALLX, sf_window);
+    auto pos   = Point2((canvas_w/number_of_wallsx) * i, 5.0f);
+    wallsx->SetPosition(pos);
+    wallx.push_back(wallsx);
+  }
+
   auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
   auto pos  = Point2((canvas_w/4), 100);
   coin->SetPosition(pos);
@@ -86,7 +95,7 @@ void SFApp::OnUpdateWorld() {
     // do something here
   }
 
-  // Detect collisions
+  // Detect collisionshttp://www.github.comn/
   for(auto p : projectiles) {
     for(auto a : aliens) {
       if(p->CollidesWith(a)) {
@@ -126,11 +135,12 @@ void SFApp::OnRender() {
   }
 
   for(auto wx: wallx) {
-    c->OnRender;
+    wx->OnRender();
  }
 
  for(auto wy: wally) {
-    c->OnRender;
+    wy->OnRender();
+
  }
 
   // Switch the off-screen buffer to be on-screen
