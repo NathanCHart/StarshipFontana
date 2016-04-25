@@ -36,7 +36,6 @@ const int number_of_wallsxtop = 20;
     wallx.push_back(wallsx);
   }
 
-
   auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
   auto pos  = Point2((canvas_w/4), 100);
   coin->SetPosition(pos);
