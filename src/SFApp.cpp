@@ -27,6 +27,16 @@ const int number_of_wallsx = 20;
     wallx.push_back(wallsx);
   }
 
+const int number_of_wallsxtop = 20;
+  for(int i=0; i<number_of_wallsxtop; i++) {
+
+    auto wallsx = make_shared<SFAsset>(SFASSET_WALLX, sf_window);
+    auto pos   = Point2((canvas_w/number_of_wallsxtop) * i, 475.0f);
+    wallsx->SetPosition(pos);
+    wallx.push_back(wallsx);
+  }
+
+
   auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
   auto pos  = Point2((canvas_w/4), 100);
   coin->SetPosition(pos);
@@ -104,6 +114,15 @@ void SFApp::OnUpdateWorld() {
       }
     }
   }
+
+ for(auto wx : wallx) {
+      if(player->CollidesWith(wx)) {
+        player->HandleCollision();
+        wx->HandleCollision();	
+	std::cout<<"Player Collides with wall"<<std::endl;
+      }
+    
+    }
 
   // remove dead aliens (the long way)
   list<shared_ptr<SFAsset>> tmp;
