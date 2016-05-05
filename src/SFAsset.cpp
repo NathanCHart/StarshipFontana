@@ -131,26 +131,6 @@ void SFAsset::GoSouth() {
 }
 
 void SFAsset::Stop() {
-  if(SFEVENT_PLAYER_UP){
-	Vector2 c = *(bbox->centre) + Vector2(0.0f, -3.0f);
-        bbox->centre.reset();
-        bbox->centre = make_shared<Vector2>(c);
-}
-if(SFEVENT_PLAYER_DOWN){
-	Vector2 c = *(bbox->centre) + Vector2(0.0f, 3.0f);
-        bbox->centre.reset();
-        bbox->centre = make_shared<Vector2>(c);
-}
-if(SFEVENT_PLAYER_LEFT){
-	Vector2 c = *(bbox->centre) + Vector2(0.0f, -6.0f);
-        bbox->centre.reset();
-        bbox->centre = make_shared<Vector2>(c);
-}
-if(SFEVENT_PLAYER_RIGHT){
-	Vector2 c = *(bbox->centre) + Vector2(0.0f, 6.0f);
-        bbox->centre.reset();
-        bbox->centre = make_shared<Vector2>(c);
-}
 
 }
 

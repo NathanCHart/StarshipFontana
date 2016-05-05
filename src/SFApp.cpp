@@ -77,17 +77,55 @@ void SFApp::OnEvent(SFEvent& event) {
     OnUpdateWorld();
     OnRender();
     break;
+
   case SFEVENT_PLAYER_LEFT:
     player->GoWest();
+
+for(auto wx : wallx) {
+  if(player->CollidesWith(wx)) {
+        player->HandleCollision();
+        wx->HandleCollision();
+	player->GoEast();
+}
+}
+
     break;
+
   case SFEVENT_PLAYER_RIGHT:
     player->GoEast();
+
+for(auto wx : wallx) {
+  if(player->CollidesWith(wx)) {
+        player->HandleCollision();
+        wx->HandleCollision();
+	player->GoWest();
+}
+}
+
     break;
   case SFEVENT_PLAYER_UP:
     player->GoNorth();
+
+for(auto wx : wallx) {
+  if(player->CollidesWith(wx)) {
+        player->HandleCollision();
+        wx->HandleCollision();
+	player->GoSouth();
+}
+}
+
     break;
   case SFEVENT_PLAYER_DOWN:
     player->GoSouth();
+
+for(auto wx : wallx) {
+  if(player->CollidesWith(wx)) {
+        player->HandleCollision();
+        wx->HandleCollision();
+	player->GoNorth();
+}
+}
+
     break;
   case SFEVENT_FIRE:
     fire ++;
@@ -132,15 +170,6 @@ void SFApp::OnUpdateWorld() {
     }
   }
 
- for(auto wx : wallx) {
-      if(player->CollidesWith(wx)) {
-        player->HandleCollision();
-        wx->HandleCollision();	
-	player->Stop();
-	std::cout<<"Player Collides with wall"<<std::endl;
-      }
-    
-    }
 
   // remove dead aliens (the long way)
   list<shared_ptr<SFAsset>> tmp;
