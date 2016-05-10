@@ -89,6 +89,14 @@ for(auto wx : wallx) {
 }
 }
 
+for(auto wy : wally) {
+  if(player->CollidesWith(wy)) {
+        player->HandleCollision();
+        wy->HandleCollision();
+	player->GoEast();
+}
+}
+
     break;
 
   case SFEVENT_PLAYER_RIGHT:
@@ -98,6 +106,14 @@ for(auto wx : wallx) {
   if(player->CollidesWith(wx)) {
         player->HandleCollision();
         wx->HandleCollision();
+	player->GoWest();
+}
+}
+
+for(auto wy : wally) {
+  if(player->CollidesWith(wy)) {
+        player->HandleCollision();
+        wy->HandleCollision();
 	player->GoWest();
 }
 }
@@ -114,6 +130,13 @@ for(auto wx : wallx) {
 }
 }
 
+for(auto wy : wally) {
+  if(player->CollidesWith(wy)) {
+        player->HandleCollision();
+        wy->HandleCollision();
+	player->GoSouth();
+}
+}
     break;
   case SFEVENT_PLAYER_DOWN:
     player->GoSouth();
@@ -126,6 +149,13 @@ for(auto wx : wallx) {
 }
 }
 
+for(auto wy : wally) {
+  if(player->CollidesWith(wy)) {
+        player->HandleCollision();
+        wy->HandleCollision();
+	player->GoNorth();
+}
+}
     break;
   case SFEVENT_FIRE:
     fire ++;
