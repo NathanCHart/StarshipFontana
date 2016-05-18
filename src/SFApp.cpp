@@ -228,6 +228,8 @@ int lives = 3;
       if (el->CollidesWith(player)){
 	el->HandleCollision();
 	player->HandleCollision();
+      std::cout<<"GAME OVER"<<std::endl;
+      is_running=false;
 
 }
 }
@@ -244,6 +246,8 @@ int lives = 3;
   aliens = list<shared_ptr<SFAsset>>(tmp);
 }
 
+
+  
 void SFApp::OnRender() {
   SDL_RenderClear(sf_window->getRenderer());
 
