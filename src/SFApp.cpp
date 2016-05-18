@@ -187,7 +187,13 @@ void SFApp::OnUpdateWorld() {
   }
 
   for(auto c: coins) {
+
     c->GoNorth();
+    for(auto wx: wallx){
+    if(c->CollidesWith(wx)){
+	c->GoSouth();
+}
+}
   }
 
   for (auto el: enemylaser){
