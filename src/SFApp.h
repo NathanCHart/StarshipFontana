@@ -43,5 +43,6 @@ private:
   list<shared_ptr<SFAsset> > enemylaser;
 
   int fire;
+  int score;
 };
 #endif

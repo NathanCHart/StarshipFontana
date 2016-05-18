@@ -2,7 +2,7 @@
 
 
 
-SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_window(window) {
+SFApp::SFApp(std::shared_ptr<SFWindow> window) : score(0), fire(0), is_running(true), sf_window(window) {
   int canvas_w, canvas_h;
   SDL_GetRendererOutputSize(sf_window->getRenderer(), &canvas_w, &canvas_h);
 
@@ -15,7 +15,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_aliens; i++) {
     // place an alien at width/number_of_aliens * i
     auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
-    auto pos   = Point2((canvas_w/number_of_aliens) * i+30, 200.0f);
+    auto pos   = Point2((canvas_w/number_of_aliens) * i+30, 420.0f);
     alien->SetPosition(pos);
     aliens.push_back(alien);
   }
@@ -28,6 +28,9 @@ const int number_of_wallsx = 20;
     wallsx->SetPosition(pos);
     wallx.push_back(wallsx);
   }
+
+
+
 
 const int number_of_wallsy = 20;
   for(int i=0; i<number_of_wallsy; i++) {
@@ -193,26 +196,52 @@ void SFApp::OnUpdateWorld() {
 }
 
 int randomno;
+int mov;
 
   // Update enemy positions
+
   for(auto a : aliens) {
     // do something here
+	mov= rand() % 3;
 	randomno= rand() % 1000;
 	if (randomno == 50){
 
 	FireEnemy();
 }
-  
-	for(auto wy : wally) {
-  if(a->CollidesWith(wy)) {
-
+       if(mov == 0){
+	a->GoWest();
+	for(auto wy : wally){
+	if(a->CollidesWith(wy)){
 	a->GoEast();
-
-
 }
+}
+}
+	 else if(mov == 1){
+	a->GoEast();
+	for(auto wy : wally){
+	if(a->CollidesWith(wy)){
+	a->GoWest();
+}
+}
+}
+	
+	else if(mov == 2){
+	a->GoSouthE();
+}
+	for(auto wx : wallx){
+	if(a->CollidesWith(wx)){
+	std::cout<<"GAME OVER"<<std::endl;
+	is_running=false;
+}
+}
+
+	if(a->CollidesWith(player)){
+	std::cout<<"GAME OVER"<<std::endl;
+	is_running=false;
+}		 
 }
 		
-  }
+  
 int lives = 3;
   // Detect collisionshttp://www.github.comn/
   for(auto p : projectiles) {
@@ -220,7 +249,14 @@ int lives = 3;
       if(p->CollidesWith(a)) {
         p->HandleCollision();
         a->HandleCollision();
+        score= score+100;
+        std::cout<<"Score = "<<score<<std::endl;
+        
       }
+      if(score==1000){
+	 std::cout<<"Congratulations, you win!"<<std::endl;
+         is_running = false;
+}
     }
   }
 

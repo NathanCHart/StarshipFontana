@@ -37,6 +37,7 @@ public:
   virtual void      GoWest();
   virtual void      GoNorth();
   virtual void      GoSouth();
+  virtual void      GoSouthE();
   virtual void	    Stop();
   virtual void      SetNotAlive();
   virtual bool      IsAlive();

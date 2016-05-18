@@ -133,6 +133,12 @@ void SFAsset::GoSouth() {
   bbox->centre = make_shared<Vector2>(c);
 }
 
+void SFAsset::GoSouthE() {
+  Vector2 c = *(bbox->centre) + Vector2(0.0f, -0.3f);
+  bbox->centre.reset();
+  bbox->centre = make_shared<Vector2>(c);
+}
+
 void SFAsset::Stop() {
 
 }
