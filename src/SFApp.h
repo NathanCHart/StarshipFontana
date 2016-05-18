@@ -27,6 +27,7 @@ public:
   void    OnRender();
 
   void    FireProjectile();
+  void    FireEnemy();
 private:
   bool                    is_running;
 
@@ -39,6 +40,7 @@ private:
   list<shared_ptr<SFAsset> > coins;
   list<shared_ptr<SFAsset> > wallx;
   list<shared_ptr<SFAsset> > wally;
+  list<shared_ptr<SFAsset> > enemylaser;
 
   int fire;
 };

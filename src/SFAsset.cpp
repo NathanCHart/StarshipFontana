@@ -24,6 +24,9 @@ SFAsset::SFAsset(SFASSETTYPE type, std::shared_ptr<SFWindow> window): type(type)
   case SFASSET_WALLY:
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/wallheight.png"); 
     break;
+  case SFASSET_ENEMYLASER:
+    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/EnemyLaser.png");
+    break;
   }
 
   if(!sprite) {

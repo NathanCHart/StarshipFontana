@@ -1,5 +1,7 @@
 #include "SFApp.h"
 
+
+
 SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_window(window) {
   int canvas_w, canvas_h;
   SDL_GetRendererOutputSize(sf_window->getRenderer(), &canvas_w, &canvas_h);
@@ -185,11 +187,33 @@ void SFApp::OnUpdateWorld() {
     c->GoNorth();
   }
 
+  for (auto el: enemylaser){
+	el->GoSouth();
+
+}
+
+int randomno;
+
   // Update enemy positions
   for(auto a : aliens) {
     // do something here
-  }
+	randomno= rand() % 1000;
+	if (randomno == 50){
 
+	FireEnemy();
+}
+  
+	for(auto wy : wally) {
+  if(a->CollidesWith(wy)) {
+
+	a->GoEast();
+
+
+}
+}
+		
+  }
+int lives = 3;
   // Detect collisionshttp://www.github.comn/
   for(auto p : projectiles) {
     for(auto a : aliens) {
@@ -199,6 +223,14 @@ void SFApp::OnUpdateWorld() {
       }
     }
   }
+
+  for(auto el : enemylaser) {
+      if (el->CollidesWith(player)){
+	el->HandleCollision();
+	player->HandleCollision();
+
+}
+}
 
 
   // remove dead aliens (the long way)
@@ -225,6 +257,10 @@ void SFApp::OnRender() {
   for(auto a: aliens) {
     if(a->IsAlive()) {a->OnRender();}
   }
+ 
+  for(auto el: enemylaser){
+   if (el->IsAlive()) {el->OnRender();}
+}
 
   for(auto c: coins) {
     c->OnRender();
@@ -248,4 +284,13 @@ void SFApp::FireProjectile() {
   auto v  = player->GetPosition();
   pb->SetPosition(v);
   projectiles.push_back(pb);
+}
+
+void SFApp::FireEnemy() {
+  auto pe = make_shared<SFAsset>(SFASSET_ENEMYLASER, sf_window);
+ for(auto a: aliens){
+  auto q =  a->GetPosition();
+  pe->SetPosition(q);
+  enemylaser.push_back(pe);
+}
 }
